@@ -1,5 +1,6 @@
+const app_id = "AKfycbxd27-5OnsUgfxDC1xJURvJ3uyilFffeSQfIQjvbs-lYcawx_HvoJ-thdU-UOlbM8ddTA"
 function loadExerciseOptions() {
-  fetch("https://script.google.com/macros/s/AKfycbwUBj0gxjr0DnCulENZ58MRb8UzQL6ePKGv-3GE6itLYM4L4VJvsGB87WmCQnfH50j5RA/exec")
+  fetch("https://script.google.com/macros/s/" + app_id + "/exec")
     .then(res => res.json())
     .then(exercises => {
       const select = document.getElementById("exercise");
@@ -71,10 +72,14 @@ function loadExerciseOptions() {
     }
 
     function finishWorkout() {
-      fetch("https://script.google.com/macros/s/AKfycbwUBj0gxjr0DnCulENZ58MRb8UzQL6ePKGv-3GE6itLYM4L4VJvsGB87WmCQnfH50j5RA/exec", {
+      const payload = JSON.stringify({ entries: workoutEntries });
+
+      fetch("https://script.google.com/macros/s/" + app_id + "/exec", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ entries: workoutEntries })
+        headers: {
+          "Content-Type": "text/plain"  // ✅ No preflight
+        },
+        body: payload  // Still sending JSON but labeled as plain text
       })
       .then(response => response.text())
       .then(() => {
