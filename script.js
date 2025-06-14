@@ -78,7 +78,7 @@ function loadExerciseOptions() {
         <td>${exercise}</td>
         <td>${weight}</td>
         <td>${reps}</td>
-        <td><button onclick="deleteEntry(this)">🗑️</button></td>
+        <td><button onclick="deleteEntry(this)">Delete</button></td>
       `;
 
       table.appendChild(row);
