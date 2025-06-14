@@ -1,36 +1,29 @@
-// Simple password check
-const password = prompt("Enter password:");
-if (password !== "mySecret123") {
-  alert("Access denied");
-  document.body.innerHTML = "";
+// Call this when the page loads
+function loadExerciseOptions() {
+  fetch("https://script.google.com/macros/s/AKfycbxC8TMs9a1aI1vDFgQKXzHQPCKBfpSLhCqFpaBIT9g/exec")
+    .then(res => res.json())
+    .then(exercises => {
+      const select = document.getElementById("exercise");
+      select.innerHTML = ""; // Clear any existing options
+
+      exercises.forEach(name => {
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        select.appendChild(option);
+      });
+    })
+    .catch(err => console.error("Failed to load exercises:", err));
 }
 
-const workoutEntries = [];
-
-function addEntry() {
-  const exercise = document.getElementById('exercise').value;
-  const weight = document.getElementById('weight').value;
-  const reps = document.getElementById('reps').value;
-
-  if (!exercise || !weight || !reps) return alert("Fill all fields");
-
-  workoutEntries.push({ exercise, weight, reps });
-
-  const row = document.createElement('tr');
-  row.innerHTML = `<td>${exercise}</td><td>${weight}</td><td>${reps}</td>`;
-  document.getElementById('workoutTable').appendChild(row);
-}
-
-function finishWorkout() {
-  fetch("https://script.google.com/macros/s/AKfycbywPpf-nU9sRE6ls6P1CZlCeDQ_1XpjEVAIfOQCNIsWavPuI_4AAvLf2bbiOtrLCqxL/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ entries: workoutEntries })
-  })
-  .then(response => response.text())
-  .then(() => {
-    alert("Workout saved!");
-    location.reload();
-  })
-  .catch(err => alert("Error saving workout: " + err));
-}
+// Call it after auth login succeeds:
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('workoutSection').style.display = 'block';
+    loadExerciseOptions(); // ✅ Load dropdown options
+  } else {
+    document.getElementById('loginSection').style.display = 'block';
+    document.getElementById('workoutSection').style.display = 'none';
+  }
+});
