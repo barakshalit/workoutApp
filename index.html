@@ -72,11 +72,12 @@
       if (user) {
         document.getElementById('loginSection').style.display = 'none';
         document.getElementById('workoutSection').style.display = 'block';
+        loadExerciseOptions(); 
       } else {
         document.getElementById('loginSection').style.display = 'block';
         document.getElementById('workoutSection').style.display = 'none';
       }
-    });
+});
 
     function addEntry() {
       const exercise = document.getElementById('exercise').value;
