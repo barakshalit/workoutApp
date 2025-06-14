@@ -64,11 +64,42 @@ function loadExerciseOptions() {
         return;
       }
 
-      workoutEntries.push({ exercise, weight, reps });
+      // Add entry to the array
+      const entry = { exercise, weight, reps };
+      workoutEntries.push(entry);
+      const index = workoutEntries.length - 1;
 
+      // Add row to table with a delete button
+      const table = document.getElementById('workoutTable');
       const row = document.createElement('tr');
-      row.innerHTML = `<td>${exercise}</td><td>${weight}</td><td>${reps}</td>`;
-      document.getElementById('workoutTable').appendChild(row);
+      row.setAttribute('data-index', index);
+
+      row.innerHTML = `
+        <td>${exercise}</td>
+        <td>${weight}</td>
+        <td>${reps}</td>
+        <td><button onclick="deleteEntry(this)">🗑️</button></td>
+      `;
+
+      table.appendChild(row);
+    }
+
+    function deleteEntry(button) {
+      const row = button.closest('tr');
+      const index = parseInt(row.getAttribute('data-index'));
+
+      // Remove from the array
+      workoutEntries.splice(index, 1);
+
+      // Remove the row from the table
+      row.remove();
+
+      // Re-index all remaining rows
+      const table = document.getElementById('workoutTable');
+      const rows = table.querySelectorAll('tr[data-index]');
+      rows.forEach((row, newIndex) => {
+        row.setAttribute('data-index', newIndex);
+      });
     }
 
     function finishWorkout() {
