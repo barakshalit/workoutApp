@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workout Logger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h2>Workout Logger</h2>
+
+  <form id="exerciseForm">
+    <label>Exercise:</label>
+    <select id="exercise">
+      <option value="Push Up">Push Up</option>
+      <option value="Squat">Squat</option>
+      <option value="Deadlift">Deadlift</option>
+    </select><br>
+
+    <label>Weight (kg):</label>
+    <input type="number" id="weight"><br>
+
+    <label>Repetitions:</label>
+    <input type="number" id="reps"><br>
+
+    <button type="button" onclick="addEntry()">Add</button>
+    <button type="button" onclick="finishWorkout()">Finish Workout</button>
+  </form>
+
+  <h3>Current Workout:</h3>
+  <table border="1" id="workoutTable">
+    <tr><th>Exercise</th><th>Weight</th><th>Reps</th></tr>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
