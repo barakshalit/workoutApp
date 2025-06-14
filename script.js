@@ -1,6 +1,6 @@
 // Call this when the page loads
 function loadExerciseOptions() {
-  fetch("https://script.google.com/macros/s/AKfycbzBGrOFEtiHHR9crJfLacpMuHiA0v6twNAqOWLO_a6Z/exec")
+  fetch("https://script.google.com/macros/s/AKfycbyToRzGrh-PhFltrVW45GOjmVO3MBgeks4dlMFLZ7kwgG3ImqkAxGapaoxPBA1EF89FeA/exec")
     .then(res => res.json())
     .then(exercises => {
       const select = document.getElementById("exercise");
