@@ -1,5 +1,5 @@
 function loadExerciseOptions() {
-  fetch("https://script.google.com/macros/s/AKfycbxP6F8ECgv6xxQznSGWvDgrxmlrcy1ugWjKU3z2m-MspskC9ODDoHAxfqCmZMoCt-_6qA/exec")
+  fetch("https://script.google.com/macros/s/AKfycbz5RmdL3PBY32_XqRun2RBAZUEp6dbGy0v-2OlQyao9uNE6ZdAlQLgdoCX7XKt-7sbwNw/exec")
     .then(res => res.json())
     .then(exercises => {
       const select = document.getElementById("exercise");
@@ -71,7 +71,7 @@ function loadExerciseOptions() {
     }
 
     function finishWorkout() {
-      fetch("https://script.google.com/macros/s/AKfycbxP6F8ECgv6xxQznSGWvDgrxmlrcy1ugWjKU3z2m-MspskC9ODDoHAxfqCmZMoCt-_6qA/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbz5RmdL3PBY32_XqRun2RBAZUEp6dbGy0v-2OlQyao9uNE6ZdAlQLgdoCX7XKt-7sbwNw/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ entries: workoutEntries })
