@@ -145,6 +145,12 @@ tr:last-child td {
   margin-top: 0.6em;
 }
 
+/* Center presets inside the form */
+.rep-presets {
+  justify-content: center;
+  align-items: center;
+}
+
 .preset-btn {
   flex: 0 0 auto;
   padding: 0.4em 0.8em;
