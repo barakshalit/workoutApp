@@ -23,14 +23,23 @@
         <option disabled selected>Loading exercises...</option>
       </select>
 
-      <label>Weight (kg):</label>
-      <input type="number" id="weight"><br>
+  <label>Weight (kg):</label>
+  <input type="number" id="weight" value="0" min="0"><br>
 
       <label>Repetitions:</label>
-      <input type="number" id="reps"><br>
+      <div class="reps-row">
+        <button type="button" class="step-btn" id="decreaseReps" onclick="changeReps(-1)">-</button>
+        <input type="number" id="reps" min="0">
+        <button type="button" class="step-btn" id="increaseReps" onclick="changeReps(1)">+</button>
+      </div>
+
+      <div class="rep-presets" aria-label="Repetition presets">
+        <button type="button" class="preset-btn" onclick="setReps(3)">3</button>
+        <button type="button" class="preset-btn" onclick="setReps(6)">6</button>
+        <button type="button" class="preset-btn" onclick="setReps(12)">12</button>
+      </div>
 
       <button type="button" onclick="addEntry()">Add</button>
-      <button type="button" onclick="finishWorkout()">Finish Workout</button>
     </form>
 
     <h3>Current Workout:</h3>
@@ -45,6 +54,11 @@
 
     <br>
     <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Bottom fixed finish bar -->
+  <div id="finishBar" style="display: none;">
+    <button id="finishBtn" onclick="finishWorkout()">Finish Workout</button>
   </div>
 
   <script src="script.js"> </script>

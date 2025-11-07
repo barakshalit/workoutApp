@@ -48,18 +48,25 @@ function loadExerciseOptions() {
         document.getElementById('loginSection').style.display = 'none';
         document.getElementById('workoutSection').style.display = 'block';
         loadExerciseOptions();
+        // show finish bar only when authenticated
+        const fb = document.getElementById('finishBar');
+        if (fb) fb.style.display = 'flex';
       } else {
         document.getElementById('loginSection').style.display = 'block';
         document.getElementById('workoutSection').style.display = 'none';
+        // hide finish bar when signed out
+        const fb = document.getElementById('finishBar');
+        if (fb) fb.style.display = 'none';
       }
 });
 
     function addEntry() {
       const exercise = document.getElementById('exercise').value;
-      const weight = document.getElementById('weight').value;
-      const reps = document.getElementById('reps').value;
+  const weight = document.getElementById('weight').value;
+  const reps = document.getElementById('reps').value;
 
-      if (!exercise || !weight || !reps) {
+  // basic validation: allow zero but require a value for exercise and numbers for weight/reps
+  if (!exercise || weight === '' || reps === '') {
         alert("Please fill in all fields");
         return;
       }
@@ -82,6 +89,31 @@ function loadExerciseOptions() {
       `;
 
       table.appendChild(row);
+    }
+
+    // Set repetition value directly (used by preset buttons)
+    function setReps(value) {
+      const input = document.getElementById('reps');
+      const v = parseInt(value, 10);
+      if (isNaN(v) || v < 0) {
+        input.value = '';
+        return;
+      }
+      input.value = v;
+      // move focus so keyboard appears on mobile
+      try { input.focus(); } catch (e) {}
+    }
+
+    // Increase or decrease repetitions by delta (can be negative)
+    function changeReps(delta) {
+      const input = document.getElementById('reps');
+      // parse current value or fallback to 0 when empty/invalid
+      let current = parseInt(input.value, 10);
+      if (isNaN(current)) current = 0;
+      let next = current + delta;
+      if (next < 0) next = 0;
+      input.value = next;
+      try { input.focus(); } catch (e) {}
     }
 
     function deleteEntry(button) {
