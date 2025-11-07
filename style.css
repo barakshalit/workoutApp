@@ -88,9 +88,29 @@ tr:last-child td {
     width: 95%;
   }
 
-  button {
+  /* Make primary action buttons in the form full-width, but keep small controls compact */
+  form > button,
+  #finishBar #finishBtn {
     width: 100%;
     margin-top: 1em;
+  }
+
+  /* Allow preset buttons to wrap and stay compact on small screens */
+  .rep-presets {
+    display: flex;
+    gap: 0.5em;
+    margin-top: 0.6em;
+    flex-wrap: wrap;
+  }
+
+  .preset-btn, .step-btn {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  .step-btn {
+    width: 40px;
+    height: 36px;
   }
 }
 
